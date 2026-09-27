@@ -1,14 +1,29 @@
-# Ocarina of Time replica (MakerWorld 3282642) — X1C / 0.4 mm / Textured PEI only
+# Ocarina of Time replica (MakerWorld 3282642)
 
 Source: https://makerworld.com/en/models/3282642-ocarina-epic-zelda-ocarina-of-time-replica#profileId-3723617
-Designer: Timberlake Creations. Profile 3723617 is the one you linked.
+Designer: Timberlake Creations. Profile: "AMS Required, Print whole or in Halves with Pins".
 
-> Note: MakerWorld was unreachable from the session that wrote this, so the
-> designer's exact wording could not be quoted. Everything below is written for
-> the common layout of this kind of replica (two shell halves + separate
-> mouthpiece/collar, printed on the textured plate, glued). Check the "Print
-> Profile" tab and the designer's description once in Orca; if the parts
-> differ, the orientation rule in step 2 still applies.
+## 0. What the uploaded sliced file actually contains
+
+Findings from `ocrafinalcolor_PLA_14h5m.gcode.3mf` (an Orca "export plate sliced file"):
+
+- **No model geometry.** Only G-code and preview images. It cannot be re-oriented
+  or re-sliced; that has to happen in the original project 3MF in Orca.
+- **Sliced for a Bambu Lab P1S** with the **High Temp Plate** selected. If your
+  printer is not a P1S, do not send this G-code; re-slice for your printer.
+- **Only plate 1 is sliced: "ocarina full in color"**, the whole body on its
+  side (351 layers, ~14 h, ~213 g, supports inside the sound chamber). The
+  designer says they would not recommend it.
+- **Plate 2, "ocarina split in color", is the recommended path** and is not
+  sliced. Its two halves already sit with the flat cut face on the bed and two
+  alignment pins beside them. That is already the best orientation: no support
+  inside the chamber, and the textured-PEI finish lands on the hidden glue faces.
+- Designer settings kept: 0.16 mm High Quality, 3 walls (designer asks for 3-4),
+  8 % gyroid, tree supports, 8 mm inner+outer brim, PLA at 220 °C, bed 55 °C,
+  prime tower. Designer recommends SUNLU PLA+ and superglue for the halves.
+
+Note: MakerWorld itself was unreachable from the session that wrote this; the
+designer text above was read from the file's embedded description.
 
 ## 1. What "textured plate bottom" means
 
@@ -36,7 +51,7 @@ Do not use a raft to escape the texture; a raft bottom looks worse than PEI.
 Do not lay tape or a glass sheet on the textured plate; it defeats the ABL
 probe and gives a rough first layer anyway.
 
-## 2. Orca Slicer setup (X1 Carbon, 0.4 mm, PLA)
+## 2. Orca Slicer setup (your printer, 0.4 mm, PLA)
 
 Open the downloaded 3MF in Orca (File → Import → Import 3MF/STL, or drag it
 onto the plate). Importing the 3MF brings in the designer's process, filament,
@@ -44,7 +59,7 @@ and printer settings. Then check each of these:
 
 | Setting | Value | Why |
 |---|---|---|
-| Printer | Bambu Lab X1 Carbon 0.4 nozzle | matches your machine |
+| Printer | your printer, 0.4 nozzle (the uploaded slice used P1S) | G-code is printer-specific |
 | Plate type (top bar) | **Textured PEI Plate** | must match the plate installed or the printer will pause / first layer fails |
 | Process preset | 0.16 mm Optimal @BBL X1C (0.12 mm High Quality if you want the smoothest outside) | curved shell; 0.2 mm shows visible stair steps on the dome |
 | Wall loops | 4 | strength for a hollow shell, hides infill |
@@ -75,9 +90,9 @@ Slice and use the preview slider to check three things before sending:
 3. The finger holes and windway have no support inside them (paint "support
    blocker" if they do).
 
-## 3. Send to the X1C from Orca
+## 3. Send from Orca
 
-Newer X1C firmware requires Bambu Connect for cloud printing from Orca.
+Newer Bambu firmware requires Bambu Connect for cloud printing from Orca.
 
 1. Orca → Device tab → sign in to your Bambu account (or Prepare → printer
    dropdown → "Link printer" if it is not listed).
@@ -85,7 +100,7 @@ Newer X1C firmware requires Bambu Connect for cloud printing from Orca.
 3. If the printer is in Authorization Control / Bambu Connect mode, Orca opens
    Bambu Connect automatically with the sliced 3MF. If it does not, click
    **Export plate sliced file**, then open the .3mf in Bambu Connect.
-4. In the send dialog: printer = your X1C, plate = **Textured PEI Plate**,
+4. In the send dialog: printer = your printer, plate = **Textured PEI Plate**,
    map each filament to its AMS slot, Bed Leveling ON, Flow Calibration ON,
    Timelapse OFF. Send.
 5. Watch the first layer on the camera. On textured PEI, PLA lines should look
